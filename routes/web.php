@@ -1,11 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PatientController;
 
-Route::view('/', 'welcome')->name('home');
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+// Rutas protegidas para administradores y recepcionistas
+Route::middleware(['auth', 'role:admin,receptionist'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+    
+    // CRUD completo de Pacientes
+    Route::resource('patients', PatientController::class);
+    
+    // Ruta adicional para búsqueda AJAX
+    Route::get('/api/search-patients', [PatientController::class, 'search'])
+        ->name('api.search-patients');
 });
-
-require __DIR__.'/settings.php';
