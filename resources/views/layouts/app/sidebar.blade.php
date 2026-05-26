@@ -15,6 +15,14 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="users" :href="route('admin.medicos')" :current="request()->routeIs('admin.medicos')" wire:navigate>
+                        {{ __('Médicos') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="calendar" :href="route('admin.disponibilidad')" :current="request()->routeIs('admin.disponibilidad')" wire:navigate>
+                        {{ __('Disponibilidad') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 
@@ -33,7 +41,6 @@
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
 
-        <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
