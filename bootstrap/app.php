@@ -14,5 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Throwable $e) {
+            return response($e->getMessage() . " | Archivo: " . $e->getFile() . " (Línea " . $e->getLine() . ")", 500);
+        });
     })->create();
